@@ -1,0 +1,18 @@
+1. Create bingo boards
+[[{'marked': false, 'value': 0}, ....],          {'marked': false, 'value': 0}, ....]]
+    row 0, col 0                 row 0 col 1      row 1, col 0                  row 1, col 1
+
+2. Mark called number
+	if number found on board:
+		3. Check for winners
+			a. Horizontal - if any number unmarked on row, immediate fail
+			b. Vertical - if any number unmarked on column, immediate fail
+
+4. Filter all unmarked numbers, then sum for result
+			
+  0 1 2 3 4
+0 x x x x x
+1 x x x x x
+2 x x x x x
+3 x x x x x
+4 x x x x x
