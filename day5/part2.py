@@ -10,10 +10,7 @@ def serialize_coords():
             startX, startY = startCoords.split(",")
             endX, endY = endCoords.split(",")
 
-            startX = int(startX)
-            startY = int(startY)
-            endX = int(endX)
-            endY = int(endY)
+            startX, startY, endX, endY = int(startX), int(startY), int(endX), int(endY)
 
             if startX > maxWidth:
                 maxWidth = startX
