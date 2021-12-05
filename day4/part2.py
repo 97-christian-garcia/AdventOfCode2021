@@ -39,9 +39,8 @@ def play_bingo(calls, boards):
             if board["winner"]:
                 continue
             for row in board["values"]:
-                column_index = -1
+                column_index = 0
                 for column in row:
-                    column_index += 1
                     if column["value"] == call:
                         column["marked"] = True
                         if is_winner(row, get_column(board, column_index)):
@@ -49,6 +48,7 @@ def play_bingo(calls, boards):
                             winning_boards += 1
                             if winning_boards == len(boards):
                                 return {"call": call, "board": board["values"]}
+                    column_index += 1
 
 def main():
     game = serialize_bingo()

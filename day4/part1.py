@@ -2,18 +2,18 @@
 def serialize_bingo():
     with open('day4/input.txt') as file:
         input = file.read().splitlines()
-        bingo = {"calls": input[0].split(","), "boards": []}
-        input = input[1:] # Ignore call sequence
-        current_board = -1
+        calls = input[0].split(",")
+        boards = [[]]
+        input = input[2:] # Ignore call sequence and first newline
+        current_board = 0
         for line in input:
             if not line: # Newline means new board
                 current_board += 1
-                bingo["boards"].append([])
+                boards.append([])
                 continue
-            
-            bingo["boards"][current_board].append([{"marked": False, "value": x} for x in line.split()])
+            boards[current_board].append([{"marked": False, "value": x} for x in line.split()])
 
-    return bingo
+    return calls, boards
 
 def is_winner(row, column):
     unmarked_row_vals = list(filter(lambda r: r["marked"] == False, row))
@@ -35,21 +35,21 @@ def play_bingo(calls, boards):
     for call in calls:
         for board in boards:
             for row in board:
-                column_index = -1
+                column_index = 0
                 for column in row:
-                    column_index += 1
                     if column["value"] == call:
                         column["marked"] = True
                         if is_winner(row, get_column(board, column_index)):
-                            return {"call": call, "board": board}
+                            return call, board
+                    column_index += 1
 
 def main():
-    game = serialize_bingo()
-    winner = play_bingo(game["calls"], game["boards"])
+    calls, boards = serialize_bingo()
+    winning_call, winning_board = play_bingo(calls, boards)
     unmarked_values = 0
-    for row in winner["board"]:
+    for row in winning_board:
         unmarked_values = unmarked_values + sum(int(r['value']) for r in row if not r['marked'])
-    print("{}".format(int(winner["call"]) * unmarked_values))
+    print("{}".format(int(winning_call) * unmarked_values))
 
 if __name__ == "__main__":
     main()
