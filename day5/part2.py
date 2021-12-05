@@ -27,8 +27,8 @@ def serialize_coords():
             coords.append({"startX": startX, "startY": startY, "endX": endX, "endY": endY})
 
     grid = []
-    for i in range(0, 1000):
-        grid.append([0] * 1000)
+    for i in range(0, maxWidth + 1):
+        grid.append([0] * (maxHeight + 1))
 
     return coords, grid
 
